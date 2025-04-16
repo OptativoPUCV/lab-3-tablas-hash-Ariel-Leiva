@@ -85,8 +85,23 @@ void eraseMap(HashMap * map,  char * key) {
 }
 
 Pair * searchMap(HashMap * map,  char * key) {   
+    unsigned long index = hash(key, map->capacity);
+    unsigned long originalIndex = index; //Guarda la pos en donde debería estar la key buscada
 
+    while(1){
+        Pair *bucket = map->buckets[index];
+        if(bucket == NULL) return NULL; //No esta la key
 
+        if(bucket != NULL && strcmp(bucket->key, key) == 0){
+            map->current = index;
+            return bucket;
+        }
+
+        index = (index+1) % map->capacity;
+
+        if(index == originalIndex) break;
+    }
+    
     return NULL;
 }
 
