@@ -43,7 +43,7 @@ void insertMap(HashMap * map, char * key, void * value) {
     unsigned long index = hash(key, map->capacity);
     unsigned long originalIndex = index; //Guarda la pos en donde debería insertarse
     
-    while(index != originalIndex){
+    do{
         Pair *bucket = map->buckets[index]; //sea accede al bucket que esta en esa pos
         
         if(bucket == NULL || bucket->key == NULL){
@@ -60,7 +60,7 @@ void insertMap(HashMap * map, char * key, void * value) {
         if(strcmp(bucket->key, key) == 0) return; //La clave ya existia
 
         index = (index + 1) % map->capacity; //En caso de colision se le busca el siguiente
-    }
+    }while(originalIndex != index);
 }
 
 void enlarge(HashMap * map) {
