@@ -112,10 +112,25 @@ Pair * searchMap(HashMap * map,  char * key) {
 
 Pair * firstMap(HashMap * map) {
 
+    for(unsigned long i = 0; i < map->capacity;i++){
+        Pair *bucket = map->buckets[i];
+        if(bucket != NULL && bucket->key != NULL){
+            map->current = i;
+            return bucket;
+        }    
+    }
     return NULL;
 }
 
 Pair * nextMap(HashMap * map) {
+
+    for(unsigned long i = (map->current + 1); i < map->capacity;i++){ // recorremos desde el current en vez desde la pos 0
+        Pair *bucket = map->buckets[i];
+        if(bucket != NULL && bucket->key != NULL){
+            map->current = i;
+            return bucket;
+        }    
+    }
 
     return NULL;
 }
