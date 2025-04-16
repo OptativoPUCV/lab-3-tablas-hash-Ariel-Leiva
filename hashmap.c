@@ -40,8 +40,27 @@ int is_equal(void* key1, void* key2){
 
 
 void insertMap(HashMap * map, char * key, void * value) {
+    unsigned long index = hash(key, map->capacity);
+    unsigned long originalIndex = index; //Guarda la pos en donde debería insertarse
+    
+    while(index != originalIndex){
+        Pair *bucket = map->buckets[index]; //sea accede al bucket que esta en esa pos
+        
+        if(bucket == NULL || bucket->key == NULL){
+            Pair *newPair = malloc(sizeof(Pair));
+            newPair->key = strdup(key);
+            newPair->value = value;
 
+            map->buckets[index] = newPair;
+            map->current = index;
+            map->size++;
+            return;
+        }
 
+        if(strcmp(bucket->key, key) == 0) return; //La clave ya existia
+
+        index = (index + 1) % map->capacity; //En caso de colision se le busca el siguiente
+    }
 }
 
 void enlarge(HashMap * map) {
