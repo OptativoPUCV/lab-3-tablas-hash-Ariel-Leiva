@@ -313,3 +313,13 @@ Wed, Apr 16, 2025  8:39:54 AM:
  1 file changed, 1 insertion(+), 1 deletion(-)
  tests:  0|0
 7484fad
+Wed, Apr 16, 2025  8:42:08 AM: 
+ hashmap.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+Compilation failed
+In file included from test.c:4:0:
+hashmap.c: In function 'enlarge':
+hashmap.c:81:1: error: expected ';' before '}' token
+ }
+ ^
+23757d9
