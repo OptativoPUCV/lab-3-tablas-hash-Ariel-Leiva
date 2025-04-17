@@ -49,9 +49,6 @@ void insertMap(HashMap * map, char * key, void * value) {
         if(bucket == NULL || bucket->key == NULL){
             
             Pair *newPair = createPair(key,value);
-            /*Pair *newPair = malloc(sizeof(Pair));
-            newPair->key = strdup(key);
-            newPair->value = value;*/
 
             map->buckets[index] = newPair;
             map->current = index;
@@ -110,7 +107,7 @@ Pair * searchMap(HashMap * map,  char * key) {
         Pair *bucket = map->buckets[index];
         if(bucket == NULL) return NULL; //No esta la key
 
-        if(bucket != NULL && strcmp(bucket->key, key) == 0){
+        if(bucket != NULL && is_equal(bucket->key,key)){
             map->current = index;
             return bucket;
         }
