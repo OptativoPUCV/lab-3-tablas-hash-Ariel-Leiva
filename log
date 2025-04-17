@@ -344,3 +344,31 @@ Wed, Apr 16, 2025  8:45:08 AM:
  tests:  17|0
 total_score: 70/70
 dc2b060
+Wed, Apr 16, 2025 10:03:25 PM: 
+ hashmap.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+Compilation failed
+test.c:8:8: error: '_strdup' redeclared without dllimport attribute: previous dllimport ignored [-Werror=attributes]
+    8 | char * _strdup(const char * str) {
+      |        ^~~~~~~
+test.c: In function 'enlarge_test':
+test.c:442:9: error: 'sprintf' argument 3 overlaps destination object 'msg' [-Werror=restrict]
+  442 |         sprintf(msg,"%.100s\nbut should be: \nvalue3  (null)  (null)  (null)  value4  (null)  value2  value1  value0  (null)  (null)  (null)  value5  (null)  (null)  (null)  (null)  (null)  (null)  (null)",msg);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+test.c:14:6: note: destination object referenced by 'restrict'-qualified argument 1 was declared here
+   14 | char msg[300];
+      |      ^~~
+test.c:439:18: error: 'sprintf' argument 3 overlaps destination object 'msg' [-Werror=restrict]
+  439 |             else sprintf(msg,"%.100s%s  ", msg, (char*)map->buckets[i]->value);
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+test.c:14:6: note: destination object referenced by 'restrict'-qualified argument 1 was declared here
+   14 | char msg[300];
+      |      ^~~
+test.c:438:39: error: 'sprintf' argument 3 overlaps destination object 'msg' [-Werror=restrict]
+  438 |             if(map->buckets[i]==NULL) sprintf(msg,"%.100s(null)  ",msg);
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+test.c:14:6: note: destination object referenced by 'restrict'-qualified argument 1 was declared here
+   14 | char msg[300];
+      |      ^~~
+cc1.exe: all warnings being treated as errors
+fc44d79

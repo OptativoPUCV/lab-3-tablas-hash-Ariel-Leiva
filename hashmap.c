@@ -47,9 +47,11 @@ void insertMap(HashMap * map, char * key, void * value) {
         Pair *bucket = map->buckets[index]; //sea accede al bucket que esta en esa pos
         
         if(bucket == NULL || bucket->key == NULL){
-            Pair *newPair = malloc(sizeof(Pair));
+            
+            Pair *newPair = createPair(key,value);
+            /*Pair *newPair = malloc(sizeof(Pair));
             newPair->key = strdup(key);
-            newPair->value = value;
+            newPair->value = value;*/
 
             map->buckets[index] = newPair;
             map->current = index;
@@ -57,7 +59,7 @@ void insertMap(HashMap * map, char * key, void * value) {
             return;
         }
 
-        if(strcmp(bucket->key, key) == 0) return; //La clave ya existia
+        if(is_equal(bucket->key,key)) return; //La clave ya existia
 
         index = (index + 1) % map->capacity; //En caso de colision se le busca el siguiente
     }while(originalIndex != index);
